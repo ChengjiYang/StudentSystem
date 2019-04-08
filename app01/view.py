@@ -14,7 +14,7 @@ def classes(request):
     # 执行SQL，并返回收影响行数
     # effect_row = cursor.execute("update hosts set host = '1.1.1.2'")
     # 执行SQL，并返回受影响行数
-    effect_row = cursor.execute("select id, title from class",)
+    effect_row = cursor.execute("select id, title from class order by id",)
     class_list = cursor.fetchall()
     print(class_list)
 
@@ -57,3 +57,22 @@ def add_class(request):
 
         return redirect('/classes/')
 
+def del_class(request):
+    cid = request.GET.get('cid')
+    conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='yang15045629836',
+                           db='StudentSystem', charset='utf8')
+    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    # 删除该条数据
+    cursor.execute("delete from class where id=%s", [cid,])
+    conn.commit()
+
+    # 更新之后数据
+    cursor.execute("update class set id = id - 1 where id > %s", [cid,])
+    conn.commit()
+
+    # 关闭游标
+    cursor.close()
+    # 关闭连接
+    conn.close()
+
+    return redirect('/classes/')

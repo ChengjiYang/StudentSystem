@@ -16,6 +16,7 @@
             <tr>
                 <th>ID</th>
                 <th>Class Name</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -24,6 +25,7 @@
                 <tr>
                     <td>{{ row.id }}</td>
                     <td>{{ row.title }}</td>
+                    <td><a href="/del_class/?cid={{ row.id }}">Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>
