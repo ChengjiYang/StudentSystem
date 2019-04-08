@@ -25,7 +25,10 @@
                 <tr>
                     <td>{{ row.id }}</td>
                     <td>{{ row.title }}</td>
-                    <td><a href="/del_class/?cid={{ row.id }}">Delete</a></td>
+                    <td>
+                        <a href="/del_class/?cid={{ row.id }}">Delete</a> |
+                        <a href="/edit_class/?cid={{ row.id }}">Edit</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

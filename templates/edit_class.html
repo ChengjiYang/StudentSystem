@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Class</title>
+</head>
+<body>
+    <h1>Edit Class</h1>
+    <!-- 2. 不用隐藏函数直接传值 -->
+    <form method="POST" action="/edit_class/?cid={{ result.id }}">
+        <p>
+            ID: {{ result.id }}
+            <!-- 将 id 值传到后端 -->
+            <!-- 1. <input style="display: none" name="id" value="{{ result.id }}"/> -->
+            <br>
+            Title: <input type="text" value=" {{ result.title }}" name="title"/>
+        </p>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>

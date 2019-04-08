@@ -76,3 +76,42 @@ def del_class(request):
     conn.close()
 
     return redirect('/classes/')
+
+def edit_class(request):
+    if request.method == "GET":
+        cid = request.GET.get('cid')
+        conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='yang15045629836',
+                               db='StudentSystem', charset='utf8')
+        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+
+        cursor.execute("select id, title from class where id = %s", cid)
+        result = cursor.fetchone()
+        conn.commit()
+
+        # 关闭游标
+        cursor.close()
+        # 关闭连接
+        conn.close()
+
+        print(result)
+
+        return render(request, "edit_class.html", {'result':result})
+    else:
+        cid = request.GET.get('cid')
+        title = request.POST.get('title')
+        print(cid)
+        print(title)
+
+        conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='yang15045629836',
+                               db='StudentSystem', charset='utf8')
+        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+        # 删除该条数据
+        cursor.execute("update class set title = %s where id = %s", [title, cid,])
+        conn.commit()
+
+        # 关闭游标
+        cursor.close()
+        # 关闭连接
+        conn.close()
+
+        return redirect('/classes/')

@@ -21,5 +21,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('classes/', view.classes),
     path('add_class/', view.add_class),
-    path('del_class/', view.del_class)
+    path('del_class/', view.del_class),
+    path('edit_class/', view.edit_class),
 ]
